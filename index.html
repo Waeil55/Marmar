@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Dr. Mariam | Vision 2026</title>
+    
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --bg-base: #fafafa;
+            --bg-card: #ffffff;
+            --bg-elevated: #f4f4f5;
+            --text-main: #09090b;
+            --text-dim: #71717a;
+            --border-color: #e4e4e7;
+            --accent-main: #000000;
+            --accent-hover: #27272a;
+            --accent-text: #ffffff;
+            --brand: #2563eb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-pill: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+            --font-size: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-base: #0a0a0a;
+            --bg-card: #121212;
+            --bg-elevated: #1a1a1a;
+            --text-main: #fafafa;
+            --text-dim: #a1a1aa;
+            --border-color: #27272a;
+            --accent-main: #ffffff;
+            --accent-hover: #e4e4e7;
+            --accent-text: #09090b;
+            --brand: #3b82f6;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            display: flex; height: 100vh; width: 100vw; overflow: hidden;
+        }
+
+        /* Noise Texture */
+        body::before {
+            content: ""; position: fixed; inset: 0; z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .app-layout { display: flex; width: 100%; height: 100%; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px; background: var(--bg-card); border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column; padding: 2rem 1.5rem; z-index: 100;
+        }
+
+        .brand {
+            font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 2rem; color: var(--text-main);
+        }
+        .brand i { color: var(--brand); font-size: 1.5rem; }
+
+        .nav-label {
+            font-size: 0.7rem; font-weight: 700; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.1em; margin: 1.5rem 0 0.5rem 0.5rem;
+        }
+
+        .nav-link {
+            display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem;
+            margin-bottom: 0.25rem; border-radius: var(--radius-sm); color: var(--text-dim);
+            font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: 0.2s;
+        }
+        .nav-link:hover { color: var(--text-main); background: var(--bg-elevated); }
+        .nav-link.active { color: var(--accent-text); background: var(--accent-main); }
+
+        /* Section Picker Box */
+        .section-selector {
+            background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-md);
+            margin-bottom: 1rem; border: 1px solid var(--border-color);
+        }
+        .section-opt {
+            padding: 0.6rem; border-radius: var(--radius-sm); cursor: pointer;
+            font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;
+            transition: 0.2s; color: var(--text-dim);
+        }
+        .section-opt.active { background: var(--bg-card); color: var(--brand); box-shadow: var(--shadow-sm); }
+
+        /* Main Content */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .top-header {
+            padding: 1.25rem 2.5rem; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 1px solid var(--border-color);
+        }
+
+        .view-content { flex: 1; overflow-y: auto; padding: 2.5rem; }
+        .view-section { display: none; animation: fadeIn 0.4s ease forwards; max-width: 1000px; margin: 0 auto; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Bento */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .bento-box {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .bento-huge { grid-column: span 2; grid-row: span 2; }
+        .stat-number { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; }
+
+        /* Flashcards 3D */
+        .card-3d-wrapper { width: 100%; height: 400px; perspective: 1500px; margin-bottom: 2rem; }
+        .card-body { 
+            width: 100%; height: 100%; position: relative; transform-style: preserve-3d; 
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; 
+        }
+        .card-body.flipped { transform: rotateY(180deg); }
+        .card-side {
+            position: absolute; inset: 0; backface-visibility: hidden; background: var(--bg-card);
+            border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 3rem;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            font-size: 1.5rem; font-weight: 500;
+        }
+        .card-back { transform: rotateY(180deg); background: var(--bg-elevated); color: var(--text-dim); }
+
+        /* Exam Config & Test */
+        .test-setup { 
+            text-align: center; max-width: 500px; margin: 0 auto; padding: 3rem; 
+            background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);
+        }
+        .config-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; text-align: left; }
+        .config-row label { display: block; font-size: 0.7rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.5rem; }
+        .config-row input { width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-base); color: var(--text-main); }
+        
+        .opt-box {
+            padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); margin-bottom: 0.75rem; cursor: pointer; transition: 0.2s;
+        }
+        .opt-box.correct { background: var(--success); color: white; border-color: var(--success); }
+        .opt-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+
+        .btn { padding: 1rem; border-radius: var(--radius-md); border: none; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-solid { background: var(--accent-main); color: var(--accent-text); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+
+        /* Search */
+        .search-bar { width: 100%; padding: 1rem 3rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-main); }
+
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .mobile-nav { 
+                display: flex !important; position: fixed; bottom: 0; width: 100%; background: var(--bg-card); 
+                border-top: 1px solid var(--border-color); padding: 0.75rem; justify-content: space-around; z-index: 1000;
+            }
+            .m-nav-item { display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; color: var(--text-dim); }
+            .m-nav-item.active { color: var(--brand); }
+            .view-content { padding: 1.5rem; padding-bottom: 5rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-huge { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="brand"><i class="ph-fill ph-first-aid"></i> Dr. Mariam</div>
+            
+            <div class="nav-label">Study Subject</div>
+            <div class="section-selector">
+                <div class="section-opt active" id="opt-drugs" onclick="switchSection('drugs')">
+                    <i class="ph ph-pill"></i> Pharmacology
+                </div>
+                <div class="section-opt" id="opt-law" onclick="switchSection('law')">
+                    <i class="ph ph-scales"></i> Pharmacy Law
+                </div>
+            </div>
+
+            <nav style="flex:1;">
+                <div class="nav-label">Main Menu</div>
+                <div class="nav-link active" data-v="dashboard" onclick="switchView('dashboard')"><i class="ph ph-squares-four"></i> Overview</div>
+                <div class="nav-link" data-v="flashcards" onclick="switchView('flashcards')"><i class="ph ph-cards"></i> Flashcards</div>
+                <div class="nav-link" data-v="study" onclick="switchView('study')"><i class="ph ph-books"></i> Database</div>
+                <div class="nav-label">Testing</div>
+                <div class="nav-link" data-v="exam" onclick="switchView('exam')"><i class="ph ph-timer"></i> Board Exam</div>
+            </nav>
+        </aside>
+
+        <main class="main-wrapper">
+            <header class="top-header">
+                <div id="active-section-display" style="font-weight: 700; font-size: 1.1rem;">Pharmacology</div>
+                <div class="btn-icon" onclick="toggleTheme()" style="cursor:pointer; font-size: 1.5rem;"><i class="ph ph-moon-stars"></i></div>
+            </header>
+
+            <div class="view-content">
+                <div id="dashboard" class="view-section active">
+                    <div style="margin-bottom: 2.5rem;">
+                        <h1 class="view-title">Welcome, Dr. Mariam</h1>
+                        <p class="view-subtitle" id="status-text">Ready to master Pharmacology today.</p>
+                    </div>
+                    <div class="bento-grid">
+                        <div class="bento-box bento-huge">
+                            <p style="color:var(--text-dim); font-weight:600;">Concepts Mastered</p>
+                            <div class="stat-number" id="stat-mastered">0</div>
+                        </div>
+                        <div class="bento-box">
+                            <p style="color:var(--text-dim); font-weight:600;">Best Score</p>
+                            <div class="stat-number" id="stat-score">0%</div>
+                        </div>
+                        <div class="bento-box">
+                            <p style="color:var(--text-dim); font-weight:600;">Total Tests</p>
+                            <div class="stat-number" id="stat-tests">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="flashcards" class="view-section">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h1 class="view-title">Flashcards</h1>
+                        <p id="fc-counter">0 / 0</p>
+                    </div>
+                    <div class="card-3d-wrapper" onclick="flipCard()">
+                        <div class="card-body" id="card-obj">
+                            <div class="card-side" id="fc-front">Question</div>
+                            <div class="card-side card-back" id="fc-back">Answer</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:1rem;">
+                        <button class="btn btn-outline" style="flex:1" onclick="nextCard(-1)">Previous</button>
+                        <button class="btn btn-solid" style="flex:1" onclick="nextCard(1)">Next Card</button>
+                    </div>
+                </div>
+
+                <div id="study" class="view-section">
+                    <h1 class="view-title">Database</h1>
+                    <div style="position:relative; margin: 2rem 0;">
+                        <i class="ph ph-magnifying-glass" style="position:absolute; left:1rem; top:1.1rem; color:var(--text-dim);"></i>
+                        <input type="text" id="db-search" class="search-bar" placeholder="Search questions or answers..." oninput="renderStudy()">
+                    </div>
+                    <div id="db-list" style="display:grid; gap:1rem;"></div>
+                </div>
+
+                <div id="exam" class="view-section">
+                    <div id="exam-config" class="test-setup">
+                        <i class="ph ph-shield-check" style="font-size: 3rem; color: var(--brand);"></i>
+                        <h2 style="margin-top:1rem;">Board Exam Mode</h2>
+                        <div class="config-row">
+                            <div>
+                                <label>Questions</label>
+                                <input type="number" id="ex-count" value="20" min="5">
+                            </div>
+                            <div>
+                                <label>Minutes</label>
+                                <input type="number" id="ex-time" value="20" min="1">
+                            </div>
+                        </div>
+                        <button class="btn btn-solid" style="width:100%" onclick="startExam()">Start Simulation</button>
+                    </div>
+
+                    <div id="exam-active" style="display:none;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700;">
+                            <span id="ex-progress">Q 1/20</span>
+                            <span id="ex-timer">20:00</span>
+                        </div>
+                        <h2 id="ex-q-text" style="margin-bottom:2rem; line-height:1.4;">Question?</h2>
+                        <div id="ex-options"></div>
+                    </div>
+
+                    <div id="exam-result" style="display:none; text-align:center;">
+                        <h2>Simulation Complete</h2>
+                        <div class="stat-number" id="ex-final-score" style="margin:2rem 0;">0%</div>
+                        <button class="btn btn-solid" onclick="switchView('dashboard')">Finish</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="mobile-nav" style="display:none;">
+            <div class="m-nav-item active" onclick="switchView('dashboard')"><i class="ph ph-squares-four"></i>Home</div>
+            <div class="m-nav-item" onclick="switchView('flashcards')"><i class="ph ph-cards"></i>Cards</div>
+            <div class="m-nav-item" onclick="switchView('study')"><i class="ph ph-books"></i>DB</div>
+            <div class="m-nav-item" onclick="switchView('exam')"><i class="ph ph-timer"></i>Exam</div>
+        </nav>
+    </div>
+
+    <script>
+        // Data Preservation
+        const drugData = [
+            { question: "What is the primary mechanism of Metformin?", answer: "Decreases hepatic glucose production and increases insulin sensitivity." },
+            { question: "Common side effect of Lisinopril?", answer: "Persistent dry cough." }
+        ];
+        const lawData = [
+            { question: "Which DEA Form is used to order Schedule II substances?", answer: "DEA Form 222." },
+            { question: "How long must HIPAA records be maintained?", answer: "6 years from date of creation." }
+        ];
+
+        const state = {
+            view: 'dashboard',
+            section: 'drugs',
+            data: { drugs: drugData, law: lawData },
+            fcIndex: 0,
+            exam: { active: false, questions: [], currentIdx: 0, score: 0, timer: null, timeLeft: 0 },
+            user: JSON.parse(localStorage.getItem('mariamAppV2026')) || {
+                theme: 'dark',
+                stats: { drugs: { mastered: 0, highscore: 0, tests: 0 }, law: { mastered: 0, highscore: 0, tests: 0 } }
+            }
+        };
+
+        function switchView(view) {
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link, .m-nav-item').forEach(n => n.classList.remove('active'));
+            
+            document.getElementById(view).classList.add('active');
+            state.view = view;
+
+            if(view === 'dashboard') renderDashboard();
+            if(view === 'flashcards') renderFlashcard();
+            if(view === 'study') renderStudy();
+        }
+
+        function switchSection(sec) {
+            state.section = sec;
+            document.querySelectorAll('.section-opt').forEach(opt => opt.classList.remove('active'));
+            document.getElementById(`opt-${sec}`).classList.add('active');
+            document.getElementById('active-section-display').innerText = sec === 'drugs' ? 'Pharmacology' : 'Pharmacy Law';
+            document.getElementById('status-text').innerText = `Ready to master ${sec === 'drugs' ? 'Pharmacology' : 'Law'} today.`;
+            
+            state.fcIndex = 0;
+            switchView(state.view);
+        }
+
+        function renderDashboard() {
+            const s = state.user.stats[state.section];
+            document.getElementById('stat-mastered').innerText = s.mastered;
+            document.getElementById('stat-score').innerText = s.highscore + '%';
+            document.getElementById('stat-tests').innerText = s.tests;
+        }
+
+        function renderFlashcard() {
+            const list = state.data[state.section];
+            document.getElementById('fc-front').innerText = list[state.fcIndex].question;
+            document.getElementById('fc-back').innerText = list[state.fcIndex].answer;
+            document.getElementById('fc-counter').innerText = `${state.fcIndex + 1} / ${list.length}`;
+            document.getElementById('card-obj').classList.remove('flipped');
+        }
+
+        function flipCard() { document.getElementById('card-obj').classList.toggle('flipped'); }
+        function nextCard(dir) {
+            const list = state.data[state.section];
+            state.fcIndex = (state.fcIndex + dir + list.length) % list.length;
+            renderFlashcard();
+        }
+
+        function startExam() {
+            const count = parseInt(document.getElementById('ex-count').value);
+            const mins = parseInt(document.getElementById('ex-time').value);
+            
+            state.exam.active = true;
+            state.exam.score = 0;
+            state.exam.currentIdx = 0;
+            state.exam.timeLeft = mins * 60;
+            state.exam.questions = [...state.data[state.section]].sort(() => 0.5 - Math.random()).slice(0, count);
+
+            document.getElementById('exam-config').style.display = 'none';
+            document.getElementById('exam-active').style.display = 'block';
+            document.getElementById('exam-result').style.display = 'none';
+
+            renderExamQuestion();
+            clearInterval(state.exam.timer);
+            state.exam.timer = setInterval(updateTimer, 1000);
+        }
+
+        function renderExamQuestion() {
+            const q = state.exam.questions[state.exam.currentIdx];
+            document.getElementById('ex-progress').innerText = `Q ${state.exam.currentIdx+1}/${state.exam.questions.length}`;
+            document.getElementById('ex-q-text').innerText = q.question;
+            
+            const optsDiv = document.getElementById('ex-options');
+            optsDiv.innerHTML = '';
+            
+            // Basic logic for multiple choice options
+            const options = [q.answer];
+            const others = state.data[state.section].filter(d => d.answer !== q.answer);
+            while(options.length < 4 && others.length > 0) {
+                const r = others[Math.floor(Math.random()*others.length)].answer;
+                if(!options.includes(r)) options.push(r);
+            }
+
+            options.sort(() => 0.5 - Math.random()).forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'opt-box';
+                div.innerText = opt;
+                div.onclick = () => {
+                    if(opt === q.answer) { div.classList.add('correct'); state.exam.score++; state.user.stats[state.section].mastered++; }
+                    else { div.classList.add('wrong'); }
+                    setTimeout(() => {
+                        state.exam.currentIdx++;
+                        if(state.exam.currentIdx < state.exam.questions.length) renderExamQuestion();
+                        else finishExam();
+                    }, 500);
+                };
+                optsDiv.appendChild(div);
+            });
+        }
+
+        function updateTimer() {
+            state.exam.timeLeft--;
+            const m = Math.floor(state.exam.timeLeft / 60);
+            const s = state.exam.timeLeft % 60;
+            document.getElementById('ex-timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            if(state.exam.timeLeft <= 0) finishExam();
+        }
+
+        function finishExam() {
+            clearInterval(state.exam.timer);
+            const perc = Math.round((state.exam.score / state.exam.questions.length) * 100);
+            document.getElementById('exam-active').style.display = 'none';
+            document.getElementById('exam-result').style.display = 'block';
+            document.getElementById('ex-final-score').innerText = perc + '%';
+            
+            state.user.stats[state.section].tests++;
+            if(perc > state.user.stats[state.section].highscore) state.user.stats[state.section].highscore = perc;
+            localStorage.setItem('mariamAppV2026', JSON.stringify(state.user));
+        }
+
+        function renderStudy() {
+            const term = document.getElementById('db-search').value.toLowerCase();
+            const list = document.getElementById('db-list');
+            list.innerHTML = '';
+            state.data[state.section].filter(d => d.question.toLowerCase().includes(term) || d.answer.toLowerCase().includes(term)).forEach(item => {
+                const card = document.createElement('div');
+                card.style = "background:var(--bg-card); padding:1.5rem; border-radius:12px; border:1px solid var(--border-color);";
+                card.innerHTML = `<strong>${item.question}</strong><p style="color:var(--text-dim); margin-top:0.5rem;">${item.answer}</p>`;
+                list.appendChild(card);
+            });
+        }
+
+        function toggleTheme() {
+            state.user.theme = state.user.theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', state.user.theme);
+            localStorage.setItem('mariamAppV2026', JSON.stringify(state.user));
+        }
+
+        // Init
+        document.documentElement.setAttribute('data-theme', state.user.theme);
+        renderDashboard();
+    </script>
+</body>
+</html>
