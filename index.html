@@ -3,654 +3,808 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Dr. Mariam | Vision 2026</title>
+    <title>Dr. Mariam | Elite Board Review</title>
     
-    <link rel="manifest" id="app-manifest">
-    <meta name="theme-color" content="#020617">
+    <link rel="manifest" id="dynamic-manifest">
+    <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Medical_cross_icon.svg/512px-Medical_cross_icon.svg.png">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* =========================================
-           ULTRA-MODERN DESIGN SYSTEM
-           ========================================= */
+        /* --- CORE VARIABLES & THEMING --- */
         :root {
-            /* Light Theme */
-            --bg-base: #f8fafc;
-            --bg-glass: rgba(255, 255, 255, 0.6);
-            --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-dim: #64748b;
-            --border-color: rgba(226, 232, 240, 0.8);
-            --border-highlight: rgba(255, 255, 255, 0.5);
+            /* Light Theme (Apple/macOS inspired) */
+            --bg-body: #f5f5f7;
+            --bg-surface: rgba(255, 255, 255, 0.7);
+            --bg-solid: #ffffff;
+            --bg-elevated: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --border-subtle: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.15);
             
-            --accent-1: #2563eb;
-            --accent-2: #7c3aed;
-            --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            --glow: rgba(37, 99, 235, 0.15);
+            --brand-primary: #007aff;
+            --brand-primary-hover: #0066cc;
+            --brand-gradient: linear-gradient(135deg, #007aff, #5856d6);
+            --brand-glow: rgba(0, 122, 255, 0.3);
             
-            --success: #10b981;
-            --danger: #ef4444;
+            --success: #34c759;
+            --danger: #ff3b30;
+            --warning: #ffcc00;
 
-            --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-lg: 32px;
+            --blur-md: blur(20px) saturate(180%);
+            --blur-lg: blur(40px) saturate(200%);
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+            
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
             --radius-pill: 9999px;
 
-            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            --shadow-inner: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
-
-            --font-size: 16px;
+            --font-base: 16px;
+            --trans-spring: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --trans-ease: 0.3s ease;
         }
 
         [data-theme="dark"] {
-            /* Dark Theme - Sleek Slate */
-            --bg-base: #020617;
-            --bg-glass: rgba(15, 23, 42, 0.6);
-            --bg-card: #0f172a;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --border-color: rgba(51, 65, 85, 0.6);
-            --border-highlight: rgba(255, 255, 255, 0.05);
+            /* Dark Theme (Pro/Elite inspired) */
+            --bg-body: #000000;
+            --bg-surface: rgba(28, 28, 30, 0.6);
+            --bg-solid: #1c1c1e;
+            --bg-elevated: #2c2c2e;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.15);
             
-            --accent-1: #3b82f6;
-            --accent-2: #8b5cf6;
-            --glow: rgba(59, 130, 246, 0.25);
+            --brand-primary: #0a84ff;
+            --brand-primary-hover: #007aff;
+            --brand-gradient: linear-gradient(135deg, #0a84ff, #5e5ce6);
+            --brand-glow: rgba(10, 132, 255, 0.25);
             
-            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --shadow-float: 0 25px 30px -5px rgba(0, 0, 0, 0.5), 0 15px 15px -5px rgba(0, 0, 0, 0.3);
-            --shadow-inner: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+            --success: #30d158;
+            --danger: #ff453a;
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
+        /* --- GLOBAL RESETS --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
+        h1, h2, h3, h4, .brand-text {
+            font-family: 'SF Pro Display', -apple-system, sans-serif;
+            letter-spacing: -0.02em;
+        }
+
         body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            font-size: var(--font-size);
-            display: flex;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-size: var(--font-base);
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Subtle Ambient Background */
-        .ambient {
-            position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
-        }
-        .ambient::after {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 0%, var(--glow), transparent 60%);
-            opacity: 0.7;
-        }
-
-        /* =========================================
-           LAYOUT ARCHITECTURE
-           ========================================= */
-        .app-layout {
             display: flex;
-            width: 100%; height: 100%;
             position: relative;
+            transition: background-color var(--trans-ease);
+        }
+
+        /* Ambient Glow Effect */
+        .ambient-glow {
+            position: absolute;
+            top: -20%; left: -10%;
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        /* --- LAYOUT ARCHITECTURE --- */
+        .app-shell {
+            display: flex;
+            width: 100%;
+            height: 100%;
             z-index: 1;
         }
 
         /* SIDEBAR (Desktop) */
         .sidebar {
             width: 280px;
-            margin: 1.5rem 0 1.5rem 1.5rem;
-            background: var(--bg-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
+            background: var(--bg-surface);
+            backdrop-filter: var(--blur-lg);
+            -webkit-backdrop-filter: var(--blur-lg);
+            border-right: 1px solid var(--border-subtle);
             display: flex;
             flex-direction: column;
             padding: 2rem 1.5rem;
-            z-index: 100;
-            box-shadow: var(--shadow-subtle), var(--shadow-inner);
+            flex-shrink: 0;
         }
 
-        .brand {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 2.5rem;
-            padding-left: 0.5rem;
-        }
-
-        .nav-link {
+        .brand-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.25rem;
-            border-radius: var(--radius-md);
-            color: var(--text-dim);
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-        .nav-link:hover { color: var(--text-main); background: rgba(100, 116, 139, 0.1); }
-        .nav-link.active {
-            color: #ffffff;
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 12px var(--glow);
-            font-weight: 600;
+            gap: 12px;
+            margin-bottom: 3rem;
         }
 
-        /* MAIN CONTENT AREA */
-        .main-wrapper {
+        .brand-icon {
+            width: 40px; height: 40px;
+            background: var(--brand-gradient);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--brand-glow);
+        }
+
+        .brand-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Navigation Menu */
+        .nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--trans-ease);
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: var(--border-subtle);
+        }
+
+        .nav-item.active {
+            color: white;
+            background: var(--brand-primary);
+            box-shadow: 0 4px 12px var(--brand-glow);
+        }
+
+        .nav-icon { font-size: 1.2rem; }
+
+        /* Main Content Area */
+        .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
         }
 
         /* TOP HEADER */
         .top-header {
-            padding: 2rem 3rem;
+            height: 80px;
+            padding: 0 3rem;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: space-between;
             background: transparent;
-            z-index: 50;
-            position: relative;
+            z-index: 10;
         }
 
-        /* iOS-STYLE SEGMENTED CONTROL */
-        .massive-switcher {
+        .view-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* SEGMENTED CONTROL (The Missing Sections Toggle) */
+        .section-segmented-control {
             display: flex;
-            background: rgba(100, 116, 139, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-elevated);
+            padding: 4px;
             border-radius: var(--radius-pill);
-            padding: 6px;
-            width: 100%;
-            max-width: 400px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm);
             position: relative;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .switch-btn {
-            flex: 1;
-            padding: 0.75rem 1.5rem;
+        .seg-btn {
+            padding: 8px 24px;
             border-radius: var(--radius-pill);
-            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--text-dim);
-            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
             cursor: pointer;
+            transition: color var(--trans-ease);
             z-index: 2;
-            transition: color 0.3s ease;
         }
 
-        .switch-btn.active { color: var(--text-main); }
-        [data-theme="dark"] .switch-btn.active { color: #ffffff; }
+        .seg-btn.active {
+            color: var(--text-primary);
+        }
 
-        .switch-slider {
+        .seg-indicator {
             position: absolute;
-            top: 6px; bottom: 6px;
-            width: calc(50% - 6px);
-            background: var(--bg-card);
+            top: 4px; bottom: 4px;
+            width: calc(50% - 4px);
+            background: var(--bg-solid);
             border-radius: var(--radius-pill);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1), var(--shadow-inner);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: transform var(--trans-spring);
             z-index: 1;
         }
-        [data-section="law"].active ~ .switch-slider { transform: translateX(100%); }
+        [data-section="law"].active ~ .seg-indicator { transform: translateX(100%); }
 
-        .btn-icon {
-            position: absolute;
-            right: 3rem;
+        .settings-btn {
             width: 44px; height: 44px;
             border-radius: 50%;
-            background: var(--bg-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            display: grid; place-items: center;
-            font-size: 1.25rem; color: var(--text-dim);
-            cursor: pointer; transition: all 0.2s;
-            box-shadow: var(--shadow-subtle);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: transform var(--trans-ease);
+            box-shadow: var(--shadow-sm);
         }
-        .btn-icon:hover { color: var(--text-main); transform: scale(1.05); }
+        .settings-btn:hover { transform: scale(1.05); }
 
-        /* SCROLLABLE VIEW */
-        .view-content {
+        /* SCROLLABLE VIEW CONTAINER */
+        .view-container {
             flex: 1;
             overflow-y: auto;
-            padding: 1rem 3rem 4rem 3rem;
+            overflow-x: hidden;
+            padding: 2rem 3rem 4rem 3rem;
+            scroll-behavior: smooth;
         }
-        .view-content::-webkit-scrollbar { display: none; }
+        .view-container::-webkit-scrollbar { display: none; }
 
         .view-section {
             display: none;
             opacity: 0;
-            transform: translateY(20px) scale(0.98);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
         .view-section.active {
             display: block;
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
-        .view-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            margin-bottom: 2rem;
-            color: var(--text-main);
-        }
-
-        /* =========================================
-           BENTO DASHBOARD
-           ========================================= */
-        .bento-grid {
+        /* --- DASHBOARD UI --- */
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .bento-box {
-            background: var(--bg-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
+        .dash-card {
+            background: var(--bg-surface);
+            backdrop-filter: var(--blur-md);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
             padding: 2rem;
+            box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            box-shadow: var(--shadow-subtle), var(--shadow-inner);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        .bento-box:hover { 
-            transform: translateY(-4px); 
-            box-shadow: var(--shadow-float), var(--shadow-inner); 
+
+        .dash-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--brand-gradient);
+            opacity: 0.5;
         }
 
-        .bento-huge { grid-column: span 2; grid-row: span 2; min-height: 340px; }
+        .dash-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
 
-        .stat-name { font-size: 0.85rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-        .stat-number { font-size: 4.5rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .dash-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+        }
 
-        /* =========================================
-           SMART FLASHCARDS
-           ========================================= */
-        .fc-layout { display: flex; flex-direction: column; align-items: center; max-width: 800px; margin: 0 auto; }
+        .dash-progress-ring {
+            position: absolute;
+            right: 2rem; top: 50%;
+            transform: translateY(-50%);
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(var(--brand-primary) 0%, transparent 0%);
+            display: grid; place-items: center;
+        }
+        .dash-progress-ring::before {
+            content: ''; width: 64px; height: 64px; background: var(--bg-surface); border-radius: 50%;
+        }
+
+        /* --- FLASHCARD UI --- */
+        .fc-deck {
+            max-width: 800px;
+            margin: 0 auto;
+            perspective: 2000px;
+            height: 50vh;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .fc-progress-bar {
+            width: 100%; height: 6px;
+            background: var(--border-strong);
+            border-radius: var(--radius-pill);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .fc-progress-fill {
+            height: 100%; background: var(--brand-gradient);
+            width: 0%; transition: width var(--trans-spring);
+        }
+
+        .fc-card {
+            width: 100%; height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s var(--trans-spring);
+            cursor: pointer;
+        }
+        .fc-card.flipped { transform: rotateY(180deg); }
+
+        .fc-face {
+            position: absolute;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            background: var(--bg-solid);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            font-size: 2rem;
+            font-weight: 600;
+            overflow-y: auto;
+        }
+
+        .fc-back {
+            transform: rotateY(180deg);
+            background: var(--bg-elevated);
+            color: var(--brand-primary);
+            font-size: 1.5rem;
+            font-weight: 500;
+            border-color: var(--brand-primary);
+        }
+
+        .fc-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* BUTTONS */
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: var(--radius-pill);
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all var(--trans-ease);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-primary {
+            background: var(--brand-primary);
+            color: white;
+            box-shadow: 0 4px 15px var(--brand-glow);
+        }
+        .btn-primary:active { transform: scale(0.95); background: var(--brand-primary-hover); }
         
-        .progress-track { width: 100%; height: 6px; background: rgba(100, 116, 139, 0.1); border-radius: var(--radius-pill); margin-bottom: 2.5rem; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--accent-gradient); width: 0%; transition: width 0.4s ease; border-radius: var(--radius-pill); }
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+        .btn-secondary:hover { border-color: var(--brand-primary); }
 
-        .card-3d-wrapper {
-            width: 100%; height: 420px; perspective: 1500px; margin-bottom: 2.5rem;
+        /* --- EXAM & QUIZ UI --- */
+        .exam-setup { text-align: center; max-width: 600px; margin: 5vh auto; }
+        .exam-setup h2 { font-size: 3rem; margin-bottom: 1rem; }
+        .exam-setup p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 3rem; }
+
+        .exam-header-info {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1rem;
         }
-        .card-body {
-            width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer;
+        .exam-timer {
+            font-size: 2rem; font-weight: 800; color: var(--danger);
+            font-variant-numeric: tabular-nums;
         }
-        .card-body.flipped { transform: rotateY(180deg); }
+
+        .question-text {
+            font-size: 2rem; font-weight: 700; margin-bottom: 3rem; line-height: 1.4;
+        }
+
+        .options-grid { display: flex; flex-direction: column; gap: 1rem; }
+        .opt-card {
+            background: var(--bg-solid);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            font-size: 1.1rem; font-weight: 500; color: var(--text-primary);
+            text-align: left; cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative; overflow: hidden;
+        }
+        .opt-card:hover { border-color: var(--brand-primary); transform: translateX(8px); background: var(--bg-elevated); }
+        .opt-card.correct { background: var(--success); border-color: var(--success); color: white; transform: scale(1.02); }
+        .opt-card.wrong { background: var(--danger); border-color: var(--danger); color: white; opacity: 0.8; }
+
+        /* --- STUDY GUIDE --- */
+        .search-container { margin-bottom: 2rem; position: relative; }
+        .search-input {
+            width: 100%; padding: 1.5rem 2rem 1.5rem 4rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl); font-size: 1.2rem; color: var(--text-primary);
+            outline: none; transition: border-color var(--trans-ease); box-shadow: var(--shadow-sm);
+        }
+        .search-input:focus { border-color: var(--brand-primary); }
+        .search-icon { position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--text-secondary); }
+
+        .study-list { display: flex; flex-direction: column; gap: 1rem; }
+        .study-item {
+            background: var(--bg-solid); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md); padding: 1.5rem 2rem;
+            transition: transform 0.2s ease;
+        }
+        .study-item:hover { transform: translateY(-2px); border-color: var(--brand-primary); box-shadow: var(--shadow-md); }
+        .study-q { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--brand-primary); }
+        .study-a { font-size: 1rem; color: var(--text-primary); line-height: 1.6; white-space: pre-wrap; }
+
+        /* --- SETTINGS MODAL --- */
+        .modal-backdrop {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 999; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity var(--trans-ease);
+        }
+        .modal-backdrop.active { opacity: 1; pointer-events: all; }
+        .modal-card {
+            background: var(--bg-solid); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl); width: 90%; max-width: 400px;
+            padding: 2.5rem; box-shadow: var(--shadow-lg);
+            transform: scale(0.9) translateY(20px); transition: transform var(--trans-spring);
+        }
+        .modal-backdrop.active .modal-card { transform: scale(1) translateY(0); }
         
-        .card-side {
-            position: absolute; inset: 0; backface-visibility: hidden;
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg); padding: 3rem;
-            display: flex; align-items: center; justify-content: center; text-align: center;
-            box-shadow: var(--shadow-float), var(--shadow-inner); font-size: 1.75rem; font-weight: 500; line-height: 1.5;
-            overflow-y: auto; color: var(--text-main);
-        }
-        .card-back { transform: rotateY(180deg); background: var(--text-main); color: var(--bg-base); border: none; }
-        [data-theme="dark"] .card-back { background: #f8fafc; color: #020617; }
-
-        .btn-group { display: flex; gap: 1rem; width: 100%; }
-        .btn {
-            padding: 1rem 2rem; border-radius: var(--radius-pill); border: none;
-            font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .btn-solid { background: var(--text-main); color: var(--bg-base); flex: 2; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        [data-theme="dark"] .btn-solid { background: #f8fafc; color: #020617; }
-        .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
-        .btn-outline { background: var(--bg-glass); border: 1px solid var(--border-color); color: var(--text-main); flex: 1; backdrop-filter: blur(12px); }
-        .btn-outline:hover { background: rgba(100, 116, 139, 0.1); }
-
-        /* =========================================
-           EXAM / QUIZ
-           ========================================= */
-        .test-setup { text-align: center; max-width: 600px; margin: 8vh auto; }
-        .test-setup h2 { font-size: 3rem; margin-bottom: 1rem; letter-spacing: -0.03em; font-weight: 800; }
-        .test-setup p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 3rem; line-height: 1.6; }
-
-        .test-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .q-counter { font-size: 1.1rem; font-weight: 600; color: var(--text-dim); }
-        .q-timer { font-size: 1.75rem; font-weight: 700; color: var(--danger); font-variant-numeric: tabular-nums; }
-
-        .q-text { font-size: 1.5rem; font-weight: 600; margin-bottom: 3rem; line-height: 1.5; color: var(--text-main); }
-
-        .opt-grid { display: flex; flex-direction: column; gap: 1rem; }
-        .opt-box {
-            padding: 1.25rem 1.5rem; background: var(--bg-glass); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); font-size: 1.1rem; font-weight: 500; color: var(--text-main);
-            cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); text-align: left;
-            backdrop-filter: blur(12px);
-        }
-        .opt-box:hover { border-color: var(--text-dim); transform: scale(1.01); background: rgba(100, 116, 139, 0.05); }
-        .opt-box.correct { background: var(--success); border-color: var(--success); color: white; transform: scale(1.02); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); }
-        .opt-box.wrong { background: var(--danger); border-color: var(--danger); color: white; opacity: 0.7; }
-
-        .result-view { text-align: center; padding-top: 10vh; }
-        .final-score { font-size: 7rem; font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 2rem; letter-spacing: -0.04em; }
-
-        /* =========================================
-           STUDY KNOWLEDGE BASE
-           ========================================= */
-        .search-bar {
-            width: 100%; padding: 1.25rem 1.5rem; background: var(--bg-glass); border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg); font-size: 1.1rem; font-weight: 400; color: var(--text-main);
-            outline: none; margin-bottom: 2.5rem; box-shadow: var(--shadow-subtle), var(--shadow-inner); 
-            transition: all 0.3s; backdrop-filter: blur(12px);
-        }
-        .search-bar:focus { border-color: var(--accent-1); box-shadow: 0 0 0 3px var(--glow); }
-
-        .db-grid { display: grid; gap: 1rem; }
-        .db-card {
-            background: var(--bg-glass); border: 1px solid var(--border-color); border-radius: var(--radius-md);
-            padding: 1.5rem; transition: transform 0.2s; backdrop-filter: blur(12px);
-        }
-        .db-card:hover { transform: translateY(-2px); border-color: var(--text-dim); }
-        .db-q { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-main); }
-        .db-a { font-size: 1rem; font-weight: 400; color: var(--text-dim); line-height: 1.6; white-space: pre-wrap; }
-
-        /* =========================================
-           SETTINGS MODAL
-           ========================================= */
-        .modal-bg {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-        }
-        .modal-bg.active { opacity: 1; pointer-events: all; }
-        .modal-box {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg);
-            width: 90%; max-width: 420px; padding: 2.5rem; box-shadow: var(--shadow-float), var(--shadow-inner);
-            transform: scale(0.95) translateY(10px); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .modal-bg.active .modal-box { transform: scale(1) translateY(0); }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle); }
+        .setting-item:last-child { border: none; padding-bottom: 0; }
+        .setting-label { font-size: 1.1rem; font-weight: 600; }
         
-        .set-item { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--border-color); }
-        .set-item:last-of-type { border: none; padding-bottom: 0; }
-        .set-text { font-size: 1.1rem; font-weight: 500; }
-
-        /* Modern Toggle */
-        .mega-toggle {
-            appearance: none; width: 56px; height: 32px; background: rgba(100, 116, 139, 0.3);
-            border-radius: 999px; position: relative; cursor: pointer; outline: none; transition: 0.3s;
+        /* Custom iOS Toggle */
+        .ios-toggle {
+            position: relative; width: 50px; height: 30px;
+            appearance: none; outline: none; background: var(--border-strong);
+            border-radius: 15px; cursor: pointer; transition: background 0.3s;
         }
-        .mega-toggle::after {
-            content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 24px;
-            background: #ffffff; border-radius: 50%; transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        .ios-toggle::after {
+            content: ''; position: absolute; top: 2px; left: 2px;
+            width: 26px; height: 26px; background: white; border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: transform 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
         }
-        .mega-toggle:checked { background: var(--success); }
-        .mega-toggle:checked::after { transform: translateX(24px); }
+        .ios-toggle:checked { background: var(--success); }
+        .ios-toggle:checked::after { transform: translateX(20px); }
 
-        /* =========================================
-           MOBILE RESPONSIVENESS
-           ========================================= */
+        /* --- MOBILE RESPONSIVENESS (iOS App Style) --- */
         .mobile-nav { display: none; }
         
-        @media (max-width: 1000px) {
-            .app-layout { flex-direction: column; }
+        @media (max-width: 900px) {
+            .app-shell { flex-direction: column; }
             .sidebar { display: none; }
             
-            .top-header { padding: 1.25rem; flex-direction: column; justify-content: flex-start; margin-top: env(safe-area-inset-top, 0); }
-            .massive-switcher { width: 100%; max-width: 100%; }
-            .btn-icon { position: absolute; top: 1.25rem; right: 1.25rem; width: 40px; height: 40px; }
-
-            .view-content { padding: 1rem 1.25rem 100px 1.25rem; }
-            .view-title { font-size: 2rem; margin-bottom: 1.5rem; }
-
-            .bento-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .bento-huge { grid-column: span 1; grid-row: span 1; min-height: 280px; }
-            .stat-number { font-size: 3.5rem; }
-
-            .card-3d-wrapper { height: 50vh; }
-            .card-side { padding: 1.5rem; font-size: 1.25rem; }
+            .top-header { padding: 0 1.5rem; height: 70px; flex-wrap: wrap; justify-content: space-between; margin-top: env(safe-area-inset-top, 0); }
+            .view-title { font-size: 1.5rem; }
             
-            .q-text { font-size: 1.25rem; margin-bottom: 2rem; }
-            .opt-box { padding: 1rem; font-size: 1rem; }
-
-            /* Mobile Bottom Bar */
+            /* Make segmented control span full width on small screens if needed, or keep centered */
+            .section-segmented-control { margin: 0 auto; transform: scale(0.9); }
+            
+            .view-container { padding: 1.5rem 1.5rem 100px 1.5rem; }
+            
+            .dash-value { font-size: 2.5rem; }
+            .fc-face { padding: 1.5rem; font-size: 1.3rem; }
+            .question-text { font-size: 1.5rem; }
+            
+            /* Mobile Bottom Tab Bar */
             .mobile-nav {
                 display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
-                background: var(--bg-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-                border-top: 1px solid var(--border-color); padding: 12px 1rem env(safe-area-inset-bottom, 16px) 1rem;
-                justify-content: space-around; z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+                background: var(--bg-surface); backdrop-filter: var(--blur-lg); -webkit-backdrop-filter: var(--blur-lg);
+                border-top: 1px solid var(--border-subtle); padding: 10px 1.5rem env(safe-area-inset-bottom, 20px) 1.5rem;
+                justify-content: space-between; align-items: center; z-index: 50;
             }
-            .m-nav-item {
+            .tab-item {
                 display: flex; flex-direction: column; align-items: center; gap: 4px;
-                color: var(--text-dim); font-size: 0.75rem; font-weight: 600; cursor: pointer;
-                transition: color 0.2s;
+                color: var(--text-secondary); font-size: 0.75rem; font-weight: 600; cursor: pointer;
             }
-            .m-nav-item.active { color: var(--accent-1); }
-            [data-theme="dark"] .m-nav-item.active { color: var(--text-main); }
-            .m-nav-icon { font-size: 1.25rem; margin-bottom: 2px; }
+            .tab-item.active { color: var(--brand-primary); }
+            .tab-icon { font-size: 1.4rem; margin-bottom: 2px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient"></div>
+    <div class="ambient-glow"></div>
 
-    <script>
-        const manifestStr = JSON.stringify({
-            "name": "Dr. Mariam Vision",
-            "short_name": "Mariam",
-            "description": "Hyper-modern Pharmacology & Law App",
-            "start_url": "./index.html",
-            "display": "standalone",
-            "background_color": "#020617",
-            "theme_color": "#3b82f6",
-            "icons": [{
-                "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23020617' width='512' height='512' rx='120'/><path d='M256 100 l100 200 h-200 z' fill='%233b82f6'/><text x='50%' y='80%' font-size='100' font-weight='800' fill='%23ffffff' font-family='sans-serif' text-anchor='middle'>DM</text></svg>",
-                "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable"
-            }]
-        });
-        document.getElementById('app-manifest').href = URL.createObjectURL(new Blob([manifestStr], {type: 'application/manifest+json'}));
-
-        const swStr = `
-            const CACHE = 'mariam-vision-v6';
-            self.addEventListener('install', e => self.skipWaiting());
-            self.addEventListener('fetch', e => {
-                e.respondWith(
-                    caches.match(e.request).then(res => res || fetch(e.request).then(fRes => {
-                        if(!fRes || fRes.status !== 200 || fRes.type !== 'basic') return fRes;
-                        caches.open(CACHE).then(c => c.put(e.request, fRes.clone()));
-                        return fRes;
-                    }))
-                );
-            });
-            self.addEventListener('activate', e => {
-                e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))));
-            });
-        `;
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => navigator.serviceWorker.register(URL.createObjectURL(new Blob([swStr], {type: 'application/javascript'}))));
-        }
-    </script>
-
-    <div class="app-layout">
+    <div class="app-shell">
         <aside class="sidebar">
-            <div class="brand">Dr. Mariam</div>
+            <div class="brand-header">
+                <div class="brand-icon">DM</div>
+                <div class="brand-text">Dr. Mariam Pro</div>
+            </div>
             
-            <nav style="flex:1;">
-                <div class="nav-link active" data-view="dashboard">📊 Overview</div>
-                <div class="nav-link" data-view="flashcards">🗂 Flashcards</div>
-                <div class="nav-link" data-view="exam">📝 Board Exam</div>
-                <div class="nav-link" data-view="quiz">⚡ Quick Quiz</div>
-                <div class="nav-link" data-view="study">📖 Database</div>
+            <nav class="nav-list">
+                <div class="nav-item active" data-view="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </div>
+                <div class="nav-item" data-view="flashcards">
+                    <span class="nav-icon">🗂</span> Smart Cards
+                </div>
+                <div class="nav-item" data-view="exam">
+                    <span class="nav-icon">📝</span> Board Exam
+                </div>
+                <div class="nav-item" data-view="quiz">
+                    <span class="nav-icon">⚡</span> Rapid Sprint
+                </div>
+                <div class="nav-item" data-view="study">
+                    <span class="nav-icon">📖</span> Knowledge Base
+                </div>
             </nav>
-
-            <div style="font-size: 0.8rem; color: var(--text-dim); font-weight: 500; text-align: center;">Vision 2026 Edition</div>
+            
+            <div style="margin-top: auto;">
+                <p style="font-size: 0.8rem; color: var(--text-secondary); text-align: center;">v3.0 Elite Edition</p>
+            </div>
         </aside>
 
-        <main class="main-wrapper">
+        <main class="main-content">
+            
             <header class="top-header">
-                <div class="massive-switcher" id="section-switcher">
-                    <div class="switch-btn active" data-section="drugs" onclick="switchSection('drugs')">Pharmacology</div>
-                    <div class="switch-btn" data-section="law" onclick="switchSection('law')">Pharmacy Law</div>
-                    <div class="switch-slider"></div>
+                <h1 class="view-title" id="view-title">Dashboard</h1>
+                
+                <div class="section-segmented-control" id="section-toggle">
+                    <div class="seg-btn active" data-section="drugs" onclick="switchSection('drugs')">Pharmacology</div>
+                    <div class="seg-btn" data-section="law" onclick="switchSection('law')">Pharmacy Law</div>
+                    <div class="seg-indicator"></div>
                 </div>
 
-                <div class="btn-icon" onclick="toggleModal()">⚙</div>
+                <div class="settings-btn" onclick="toggleSettings()">⚙</div>
             </header>
 
-            <div class="view-content" id="scroll-port">
+            <div class="view-container" id="scroll-area">
                 
                 <div id="dashboard" class="view-section active">
-                    <h1 class="view-title">Overview</h1>
-                    <div class="bento-grid">
-                        <div class="bento-box bento-huge">
-                            <div class="stat-name">Mastered Concepts</div>
-                            <div class="stat-number" id="stat-mastered">0</div>
-                            <div style="margin-top:auto; font-size:1rem; color:var(--text-dim); font-weight:500;" id="last-active">System Ready.</div>
+                    <div class="dashboard-grid">
+                        <div class="dash-card">
+                            <div class="dash-label">Knowledge Mastery</div>
+                            <div class="dash-value" id="stat-mastered">0</div>
+                            <div class="dash-progress-ring" id="ring-mastered"></div>
                         </div>
-                        <div class="bento-box">
-                            <div class="stat-name">Peak Exam Score</div>
-                            <div class="stat-number" id="stat-score" style="background:var(--text-main); -webkit-background-clip:text;">0%</div>
+                        <div class="dash-card">
+                            <div class="dash-label">Peak Exam Score</div>
+                            <div class="dash-value" id="stat-score">0%</div>
+                            <div class="dash-progress-ring" id="ring-score"></div>
                         </div>
-                        <div class="bento-box">
-                            <div class="stat-name">Completed Sessions</div>
-                            <div class="stat-number" id="stat-quizzes" style="background:var(--text-main); -webkit-background-clip:text;">0</div>
+                        <div class="dash-card">
+                            <div class="dash-label">Total Sprints</div>
+                            <div class="dash-value" id="stat-quizzes">0</div>
                         </div>
+                    </div>
+                    
+                    <div class="dash-card" style="margin-top: 1rem;">
+                        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Study Activity Tracker</h2>
+                        <p style="color: var(--text-secondary);" id="last-active">System initialized. Awaiting study session.</p>
                     </div>
                 </div>
 
                 <div id="flashcards" class="view-section">
-                    <h1 class="view-title">Smart Cards</h1>
-                    <div class="fc-layout">
-                        <div style="width:100%; display:flex; justify-content:space-between; margin-bottom:0.75rem; font-weight:600; font-size:0.9rem; color:var(--text-dim);">
-                            <span>Progress</span>
-                            <span id="fc-counter">0 / 0</span>
-                        </div>
-                        <div class="progress-track"><div class="progress-fill" id="fc-progress"></div></div>
+                    <div class="fc-deck">
+                        <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-progress"></div></div>
+                        <div style="text-align:center; margin-bottom:1rem; font-weight:600; color:var(--text-secondary);" id="fc-counter">Card 1 / 0</div>
                         
-                        <div class="card-3d-wrapper" onclick="flipCard()">
-                            <div class="card-body" id="card-obj">
-                                <div class="card-side" id="fc-front">Front</div>
-                                <div class="card-side card-back" id="fc-back">Back</div>
-                            </div>
+                        <div class="fc-card" id="card-obj" onclick="flipCard()">
+                            <div class="fc-face" id="fc-front">Question</div>
+                            <div class="fc-face fc-back" id="fc-back">Answer</div>
                         </div>
                         
-                        <div class="btn-group">
-                            <button class="btn btn-outline" onclick="nextCard(-1)">Previous</button>
-                            <button class="btn btn-solid" onclick="nextCard(1)">Next Card</button>
+                        <div class="fc-actions">
+                            <button class="btn-secondary" style="width: 140px;" onclick="nextCard(-1)">← Review</button>
+                            <button class="btn-primary" style="flex: 1; max-width: 300px;" onclick="nextCard(1)">Next Card →</button>
                         </div>
                     </div>
                 </div>
 
                 <div id="exam" class="view-section">
-                    <h1 class="view-title" id="test-main-title">Simulation</h1>
-                    
-                    <div class="test-setup" id="test-intro">
-                        <h2 id="intro-title">Board Exam Mode</h2>
-                        <p id="intro-desc">20 questions under strict time constraints. Prove your readiness.</p>
-                        <button class="btn btn-solid" style="margin: 0 auto; width: 100%; max-width:320px;" onclick="startTest()">Start Simulation</button>
+                    <div class="exam-setup" id="test-intro">
+                        <h2 id="intro-title">Board Simulation</h2>
+                        <p id="intro-desc">20 questions under strict time conditions. Designed to mimic the pressure of the actual pharmacy board exams.</p>
+                        <button class="btn-primary" style="margin: 0 auto; width: 250px;" onclick="startTest()">Initialize Simulation</button>
                     </div>
 
                     <div id="test-active" style="display:none; max-width: 800px; margin: 0 auto;">
-                        <div class="test-top-bar">
-                            <div class="q-counter" id="test-counter">Q 1 / 20</div>
-                            <div class="q-timer" id="test-timer">20:00</div>
+                        <div class="exam-header-info">
+                            <div style="font-size:1.2rem; font-weight:600; color:var(--text-secondary);" id="test-counter">Question 1 of 20</div>
+                            <div class="exam-timer" id="test-timer">20:00</div>
                         </div>
-                        <div class="progress-track" style="height: 4px; margin-bottom: 3rem;"><div class="progress-fill" id="test-progress"></div></div>
+                        <div class="fc-progress-bar" style="height: 4px; margin-bottom: 2.5rem;"><div class="fc-progress-fill" id="test-progress"></div></div>
                         
-                        <div class="q-text" id="test-question">Loading...</div>
-                        <div class="opt-grid" id="test-options"></div>
+                        <div class="question-text" id="test-question">Loading...</div>
+                        <div class="options-grid" id="test-options"></div>
                     </div>
 
-                    <div id="test-result" class="result-view" style="display:none;">
-                        <div class="stat-name" style="font-size: 1.5rem; margin-bottom: 1rem;">Final Evaluation</div>
-                        <div class="final-score" id="result-score">0%</div>
-                        <button class="btn btn-solid" style="margin: 0 auto; width: 240px;" onclick="endTest()">Return to HQ</button>
+                    <div id="test-result" style="display:none; text-align:center; padding-top: 5vh;">
+                        <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Evaluation Complete</h2>
+                        <div class="dash-progress-ring" id="final-ring" style="position:relative; right:auto; top:auto; transform:none; width:200px; height:200px; margin: 0 auto 3rem;">
+                            <style>#final-ring::before{width:160px;height:160px;}</style>
+                            <div style="font-size:3.5rem; font-weight:800; color:var(--text-primary); z-index:2; position:absolute;" id="result-score">0%</div>
+                        </div>
+                        <button class="btn-secondary" style="margin: 0 auto;" onclick="endTest()">Return to Dashboard</button>
                     </div>
                 </div>
-
-                <div id="quiz" class="view-section"></div>
-
-                <div id="study" class="view-section">
-                    <h1 class="view-title">Database</h1>
-                    <input type="text" id="study-search" class="search-bar" placeholder="Search knowledge base...">
-                    <div class="db-grid" id="study-list"></div>
+                
+                <div id="quiz" class="view-section"></div> <div id="study" class="view-section">
+                    <div class="search-container">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="study-search" class="search-input" placeholder="Search the knowledge base...">
+                    </div>
+                    <div class="study-list" id="study-list"></div>
                 </div>
 
             </div>
         </main>
-
+        
         <nav class="mobile-nav">
-            <div class="m-nav-item active" data-view="dashboard"><div class="m-nav-icon">📊</div>Home</div>
-            <div class="m-nav-item" data-view="flashcards"><div class="m-nav-icon">🗂</div>Cards</div>
-            <div class="m-nav-item" data-view="exam"><div class="m-nav-icon">📝</div>Exam</div>
-            <div class="m-nav-item" data-view="quiz"><div class="m-nav-icon">⚡</div>Sprint</div>
-            <div class="m-nav-item" data-view="study"><div class="m-nav-icon">📖</div>DB</div>
+            <div class="tab-item active" data-view="dashboard">
+                <span class="tab-icon">📊</span>
+                <span>Home</span>
+            </div>
+            <div class="tab-item" data-view="flashcards">
+                <span class="tab-icon">🗂</span>
+                <span>Cards</span>
+            </div>
+            <div class="tab-item" data-view="exam">
+                <span class="tab-icon">📝</span>
+                <span>Exam</span>
+            </div>
+            <div class="tab-item" data-view="quiz">
+                <span class="tab-icon">⚡</span>
+                <span>Sprint</span>
+            </div>
+            <div class="tab-item" data-view="study">
+                <span class="tab-icon">📖</span>
+                <span>DB</span>
+            </div>
         </nav>
     </div>
 
-    <div class="modal-bg" id="settings-modal">
-        <div class="modal-box">
-            <h2 style="font-size: 1.75rem; font-weight:700; margin-bottom: 2rem;">Settings</h2>
+    <div class="modal-backdrop" id="settings-modal">
+        <div class="modal-card">
+            <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">System Preferences</h2>
             
-            <div class="set-item">
-                <span class="set-text">Dark Mode</span>
-                <input type="checkbox" class="mega-toggle" id="theme-toggle" onchange="toggleTheme()">
+            <div class="setting-item">
+                <span class="setting-label">Elite Dark Mode</span>
+                <input type="checkbox" class="ios-toggle" id="theme-toggle" onchange="toggleTheme()">
             </div>
             
-            <div class="set-item">
-                <span class="set-text">Typography Size</span>
-                <div style="display:flex; gap:0.5rem;">
-                    <button class="btn btn-outline" style="padding: 8px 16px; border-radius: 8px;" onclick="changeFontSize(-2)">A-</button>
-                    <button class="btn btn-outline" style="padding: 8px 16px; border-radius: 8px;" onclick="changeFontSize(2)">A+</button>
+            <div class="setting-item">
+                <span class="setting-label">Interface Scale</span>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-secondary" style="padding: 6px 16px; border-radius: 8px;" onclick="changeFontSize(-2)">A-</button>
+                    <button class="btn-secondary" style="padding: 6px 16px; border-radius: 8px;" onclick="changeFontSize(2)">A+</button>
                 </div>
             </div>
             
-            <div class="set-item" style="margin-top: 1.5rem; flex-direction: column; gap: 0.75rem; padding: 0;">
-                <button class="btn btn-solid" style="width: 100%; background: var(--danger); box-shadow: none;" onclick="resetData()">Erase All Data</button>
-                <button class="btn btn-outline" style="width: 100%; border-color: transparent;" onclick="toggleModal()">Done</button>
+            <div class="setting-item" style="margin-top: 1rem; flex-direction: column; gap: 1rem; border:none;">
+                <button class="btn-primary" style="width: 100%; background: var(--danger); box-shadow: 0 4px 15px rgba(255, 69, 58, 0.3);" onclick="resetData()">Wipe Local Memory</button>
+                <button class="btn-secondary" style="width: 100%;" onclick="toggleSettings()">Close</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // 1. Generate Manifest
+        const manifest = {
+            "name": "Dr. Mariam Elite App",
+            "short_name": "Mariam Elite",
+            "description": "Advanced Pharmacology & Law Board Review",
+            "start_url": "./index.html",
+            "display": "standalone",
+            "background_color": "#000000",
+            "theme_color": "#0a84ff",
+            "orientation": "portrait",
+            "icons": [{
+                "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23000000' width='512' height='512' rx='120'/><path d='M256 100 l100 200 h-200 z' fill='%230a84ff'/><text x='50%' y='80%' font-size='100' font-weight='800' fill='%23ffffff' font-family='sans-serif' text-anchor='middle'>DM</text></svg>",
+                "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable"
+            }]
+        };
+        const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/manifest+json'});
+        document.getElementById('dynamic-manifest').href = URL.createObjectURL(manifestBlob);
+
+        // 2. Generate and Register Service Worker
+        const swCode = `
+            const CACHE_NAME = 'drmariam-elite-v4';
+            self.addEventListener('install', e => {
+                self.skipWaiting();
+            });
+            self.addEventListener('fetch', e => {
+                e.respondWith(
+                    caches.match(e.request).then(res => {
+                        return res || fetch(e.request).then(fetchRes => {
+                            // Only cache valid basic requests (to avoid caching errors)
+                            if(!fetchRes || fetchRes.status !== 200 || fetchRes.type !== 'basic') return fetchRes;
+                            const clone = fetchRes.clone();
+                            caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+                            return fetchRes;
+                        });
+                    }).catch(() => new Response('Offline Mode'))
+                );
+            });
+            self.addEventListener('activate', e => {
+                e.waitUntil(clients.claim());
+                e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))));
+            });
+        `;
+        const swBlob = new Blob([swCode], {type: 'application/javascript'});
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => navigator.serviceWorker.register(URL.createObjectURL(swBlob)));
+        }
+    </script>
 
     <script type="module">
         import drugData from './drugData.js';
         import lawData from './lawData.js';
 
+        // Core App State
         const state = {
             view: 'dashboard',
-            section: 'drugs',
+            section: 'drugs', // Current section (Pharmacology vs Law)
             data: { drugs: drugData, law: lawData },
             fcIndex: 0,
-            test: { active: false, type: 'exam', questions: [], currentIdx: 0, score: 0, timer: null, timeLeft: 0 },
-            user: JSON.parse(localStorage.getItem('mariamAppV2026')) || {
+            test: {
+                active: false, type: 'exam', questions: [], currentIdx: 0, score: 0, timer: null, timeLeft: 0
+            },
+            user: JSON.parse(localStorage.getItem('mariamAppElite')) || {
                 settings: { theme: 'dark', fontSize: 16 },
                 stats: {
                     drugs: { mastered: 0, highscore: 0, quizzes: 0 },
@@ -660,49 +814,63 @@
             }
         };
 
+        // Initialize App
         function init() {
             applySettings();
             updateDate();
             renderDashboard();
             setupStudyGuide();
             
-            document.querySelectorAll('.nav-link, .m-nav-item').forEach(el => {
+            // Attach View Listeners
+            document.querySelectorAll('.nav-item, .tab-item').forEach(el => {
                 el.addEventListener('click', (e) => switchView(e.currentTarget.dataset.view));
             });
+            
+            // Attach Search
             document.getElementById('study-search').addEventListener('input', (e) => renderStudyGuide(e.target.value));
         }
 
+        // View Switching Logic
         window.switchView = (view) => {
+            // Hide all views
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-link, .m-nav-item').forEach(el => el.classList.remove('active'));
+            // Remove active state from navs
+            document.querySelectorAll('.nav-item, .tab-item').forEach(el => el.classList.remove('active'));
             
+            // Set titles
+            const titles = { dashboard: 'Dashboard', flashcards: 'Smart Cards', exam: 'Board Simulation', quiz: 'Rapid Sprint', study: 'Knowledge Base' };
+            document.getElementById('view-title').innerText = titles[view];
+            
+            // Handle logical UI mapping for Exam vs Quiz
             if(view === 'exam' || view === 'quiz') {
                 const container = document.getElementById(view);
                 container.appendChild(document.getElementById('test-intro'));
                 container.appendChild(document.getElementById('test-active'));
                 container.appendChild(document.getElementById('test-result'));
                 
-                document.getElementById('test-main-title').innerText = view === 'exam' ? 'Simulation' : 'Quick Quiz';
-                document.getElementById('intro-title').innerText = view === 'exam' ? 'Board Exam Mode' : 'Rapid Sprint';
-                document.getElementById('intro-desc').innerText = view === 'exam' ? '20 questions under strict time constraints. Prove your readiness.' : '10 rapid questions. Untimed workflow to reinforce memory.';
+                document.getElementById('intro-title').innerText = view === 'exam' ? 'Board Simulation' : 'Rapid Sprint';
+                document.getElementById('intro-desc').innerText = view === 'exam' ? '20 questions. Strict timing. Simulate the real exam environment.' : '10 rapid-fire questions. Untimed workflow for memory retention.';
                 state.test.type = view;
             }
 
+            // Show active view
             document.getElementById(view).classList.add('active');
             document.querySelectorAll(`[data-view="${view}"]`).forEach(el => el.classList.add('active'));
             
             state.view = view;
-            document.getElementById('scroll-port').scrollTo(0,0);
+            document.getElementById('scroll-area').scrollTo(0,0);
 
+            // Execute view-specific renders
             if(view === 'dashboard') renderDashboard();
             if(view === 'flashcards') { state.fcIndex = 0; renderFlashcard(); }
             if(view === 'study') renderStudyGuide();
         };
 
+        // Section Switching Logic (Pharma <-> Law)
         window.switchSection = (section) => {
             state.section = section;
-            document.querySelectorAll('.switch-btn').forEach(el => el.classList.remove('active'));
-            document.querySelector(`.switch-btn[data-section="${section}"]`).classList.add('active');
+            document.querySelectorAll('.seg-btn').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.seg-btn[data-section="${section}"]`).classList.add('active');
             
             if(state.view === 'dashboard') renderDashboard();
             if(state.view === 'flashcards') { state.fcIndex = 0; renderFlashcard(); }
@@ -710,73 +878,91 @@
             if(state.test.active) endTest();
         };
 
+        // Dashboard Rendering & Animations
         function renderDashboard() {
             const stats = state.user.stats[state.section];
-            animateNumber('stat-mastered', stats.mastered);
+            const totalItems = state.data[state.section].length;
+            
+            // Animate Numbers
+            animateValue('stat-mastered', parseInt(document.getElementById('stat-mastered').innerText) || 0, stats.mastered, 800);
             document.getElementById('stat-score').innerText = stats.highscore + '%';
             document.getElementById('stat-quizzes').innerText = stats.quizzes;
+
+            // Animate Rings
+            const masterPerc = Math.min((stats.mastered / (totalItems || 1)) * 100, 100);
+            document.getElementById('ring-mastered').style.background = `conic-gradient(var(--brand-primary) ${masterPerc}%, transparent 0%)`;
+            document.getElementById('ring-score').style.background = `conic-gradient(var(--brand-primary) ${stats.highscore}%, transparent 0%)`;
         }
 
-        function animateNumber(id, end) {
-            const el = document.getElementById(id);
-            let start = parseInt(el.innerText) || 0;
-            if (start === end) { el.innerText = end; return; }
-            const duration = 800; let startT = null;
-            const step = (t) => {
-                if (!startT) startT = t;
-                const prog = Math.min((t - startT) / duration, 1);
-                el.innerText = Math.floor(start + (end - start) * (1 - Math.pow(1 - prog, 3)));
-                if (prog < 1) requestAnimationFrame(step);
+        function animateValue(id, start, end, duration) {
+            if (start === end) { document.getElementById(id).innerText = end; return; }
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 4);
+                document.getElementById(id).innerText = Math.floor(easeOut * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
             };
-            requestAnimationFrame(step);
+            window.requestAnimationFrame(step);
         }
 
         function updateDate() {
             const date = new Date(state.user.stats.lastActive);
-            document.getElementById('last-active').innerText = `Last Login: ${date.toLocaleDateString()} ${date.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
+            document.getElementById('last-active').innerText = `Last recorded activity: ${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
             state.user.stats.lastActive = new Date().toISOString();
             saveData();
         }
 
+        // Flashcard Logic
         window.flipCard = () => document.getElementById('card-obj').classList.toggle('flipped');
 
         window.nextCard = (dir) => {
             const arr = state.data[state.section];
-            if(!arr.length) return;
-            state.fcIndex = (state.fcIndex + dir + arr.length) % arr.length;
+            if(arr.length === 0) return;
+            
+            state.fcIndex += dir;
+            if(state.fcIndex < 0) state.fcIndex = arr.length - 1;
+            if(state.fcIndex >= arr.length) state.fcIndex = 0;
             
             const el = document.getElementById('card-obj');
-            el.style.transform = `scale(0.95) translateX(${dir * 40}px) rotateY(${el.classList.contains('flipped') ? 180 : 0}deg)`;
+            el.style.transform = `scale(0.85) translateX(${dir * 150}px) rotateY(${el.classList.contains('flipped') ? 180 : 0}deg)`;
             el.style.opacity = '0';
             
             setTimeout(() => {
                 el.classList.remove('flipped');
                 renderFlashcard();
+                // Reset transform without animation for snap, then animate in
                 el.style.transition = 'none';
-                el.style.transform = `scale(0.95) translateX(${-dir * 40}px)`;
+                el.style.transform = `scale(0.85) translateX(${-dir * 150}px)`;
                 
                 requestAnimationFrame(() => {
-                    el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease';
+                    el.style.transition = 'transform 0.6s var(--trans-spring), opacity 0.4s ease';
                     el.style.transform = 'scale(1) translateX(0)';
                     el.style.opacity = '1';
                 });
-            }, 200);
+            }, 300);
         };
 
         function renderFlashcard() {
             const arr = state.data[state.section];
             if(!arr.length) return;
-            document.getElementById('fc-front').innerText = arr[state.fcIndex].question;
-            document.getElementById('fc-back').innerText = arr[state.fcIndex].answer;
-            document.getElementById('fc-counter').innerText = `${state.fcIndex + 1} / ${arr.length}`;
+            const item = arr[state.fcIndex];
+            document.getElementById('fc-front').innerText = item.question;
+            document.getElementById('fc-back').innerText = item.answer;
+            document.getElementById('fc-counter').innerText = `Card ${state.fcIndex + 1} of ${arr.length}`;
             document.getElementById('fc-progress').style.width = `${((state.fcIndex + 1) / arr.length) * 100}%`;
         }
 
+        // Test Logic (Exam / Quiz)
         window.startTest = () => {
-            state.test.active = true; state.test.score = 0; state.test.currentIdx = 0;
+            state.test.active = true;
+            state.test.score = 0;
+            state.test.currentIdx = 0;
             const type = state.test.type;
+            
             const arr = [...state.data[state.section]].sort(() => 0.5 - Math.random());
-            if(!arr.length) return alert('No data.');
+            if(arr.length === 0) { alert('No data available in this section.'); return; }
             state.test.questions = arr.slice(0, type === 'exam' ? 20 : 10);
             
             document.getElementById('test-intro').style.display = 'none';
@@ -785,23 +971,30 @@
 
             if(type === 'exam') {
                 document.getElementById('test-timer').style.display = 'block';
-                state.test.timeLeft = 20 * 60; 
+                state.test.timeLeft = 20 * 60; // 20 mins
                 state.test.timer = setInterval(updateTimer, 1000);
                 updateTimer();
-            } else { document.getElementById('test-timer').style.display = 'none'; }
+            } else {
+                document.getElementById('test-timer').style.display = 'none';
+            }
 
             renderTestQuestion();
         };
 
         function renderTestQuestion() {
             const q = state.test.questions[state.test.currentIdx];
-            document.getElementById('test-counter').innerText = `Q ${state.test.currentIdx + 1} / ${state.test.questions.length}`;
+            document.getElementById('test-counter').innerText = `Question ${state.test.currentIdx + 1} of ${state.test.questions.length}`;
             document.getElementById('test-progress').style.width = `${((state.test.currentIdx) / state.test.questions.length) * 100}%`;
             
             const qEl = document.getElementById('test-question');
             qEl.style.opacity = 0; qEl.style.transform = 'translateY(10px)';
-            setTimeout(() => { qEl.innerText = q.question; qEl.style.opacity = 1; qEl.style.transform = 'translateY(0)'; }, 150);
+            
+            setTimeout(() => {
+                qEl.innerText = q.question;
+                qEl.style.opacity = 1; qEl.style.transform = 'translateY(0)';
+            }, 200);
 
+            // Options setup
             const arr = state.data[state.section];
             let distractors = arr.filter(item => item.answer !== q.answer).sort(() => 0.5 - Math.random()).slice(0, 3);
             let options = [{text: q.answer, correct: true}, ...distractors.map(d => ({text: d.answer, correct: false}))];
@@ -811,31 +1004,50 @@
             container.innerHTML = '';
             options.forEach((opt, idx) => {
                 const btn = document.createElement('div');
-                btn.className = 'opt-box'; btn.innerText = opt.text;
+                btn.className = 'opt-card';
+                btn.innerText = opt.text;
                 btn.style.opacity = 0; btn.style.transform = 'translateY(15px)';
                 btn.onclick = () => handleAnswer(btn, opt.correct);
                 container.appendChild(btn);
-                setTimeout(() => { btn.style.opacity = 1; btn.style.transform = 'translateY(0)'; }, 100 + (idx * 60));
+                
+                setTimeout(() => {
+                    btn.style.transition = 'all 0.4s var(--trans-spring)';
+                    btn.style.opacity = 1; btn.style.transform = 'translateY(0)';
+                }, 150 + (idx * 80));
             });
         }
 
         function handleAnswer(btn, isCorrect) {
-            document.querySelectorAll('.opt-box').forEach(b => { b.onclick = null; b.style.cursor = 'default'; }); 
+            const btns = document.querySelectorAll('.opt-card');
+            btns.forEach(b => { b.onclick = null; b.style.cursor = 'default'; }); 
+
             if(isCorrect) {
-                btn.classList.add('correct'); state.test.score++; state.user.stats[state.section].mastered++;
+                btn.classList.add('correct');
+                state.test.score++;
+                state.user.stats[state.section].mastered++;
             } else {
                 btn.classList.add('wrong');
-                document.querySelectorAll('.opt-box').forEach(b => { if(b.innerText === state.test.questions[state.test.currentIdx].answer) b.classList.add('correct'); });
+                btns.forEach(b => { 
+                    if(b.innerText === state.test.questions[state.test.currentIdx].answer) {
+                        b.classList.add('correct'); 
+                    }
+                });
             }
+
             setTimeout(() => {
                 state.test.currentIdx++;
-                if(state.test.currentIdx < state.test.questions.length) renderTestQuestion(); else showTestResults();
-            }, 1000);
+                if(state.test.currentIdx < state.test.questions.length) {
+                    renderTestQuestion();
+                } else {
+                    showTestResults();
+                }
+            }, 1400);
         }
 
         function updateTimer() {
             state.test.timeLeft--;
-            const m = Math.floor(state.test.timeLeft / 60), s = state.test.timeLeft % 60;
+            const m = Math.floor(state.test.timeLeft / 60);
+            const s = state.test.timeLeft % 60;
             document.getElementById('test-timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
             if(state.test.timeLeft <= 0) showTestResults();
         }
@@ -848,62 +1060,84 @@
             
             const perc = Math.round((state.test.score / state.test.questions.length) * 100);
             document.getElementById('result-score').innerText = `${perc}%`;
+            document.getElementById('final-ring').style.background = `conic-gradient(var(--brand-primary) ${perc}%, transparent 0%)`;
             
             state.user.stats[state.section].quizzes++;
-            if(state.test.type === 'exam' && perc > state.user.stats[state.section].highscore) state.user.stats[state.section].highscore = perc;
+            if(state.test.type === 'exam' && perc > state.user.stats[state.section].highscore) {
+                state.user.stats[state.section].highscore = perc;
+            }
             saveData();
         }
 
         window.endTest = () => {
-            clearInterval(state.test.timer); state.test.active = false;
+            clearInterval(state.test.timer);
+            state.test.active = false;
             document.getElementById('test-active').style.display = 'none';
             document.getElementById('test-result').style.display = 'none';
             document.getElementById('test-intro').style.display = 'block';
             switchView('dashboard');
         };
 
+        // Study Guide Logic
         function setupStudyGuide() { renderStudyGuide(); }
 
         function renderStudyGuide(filter = '') {
-            const container = document.getElementById('study-list'); container.innerHTML = '';
+            const container = document.getElementById('study-list');
+            container.innerHTML = '';
             const arr = state.data[state.section];
-            arr.filter(item => item.question.toLowerCase().includes(filter.toLowerCase()) || item.answer.toLowerCase().includes(filter.toLowerCase()))
-               .forEach(item => {
-                   const div = document.createElement('div'); div.className = 'db-card';
-                   div.innerHTML = `<div class="db-q">${item.question}</div><div class="db-a">${item.answer}</div>`;
-                   container.appendChild(div);
-               });
+            
+            arr.filter(item => 
+                item.question.toLowerCase().includes(filter.toLowerCase()) || 
+                item.answer.toLowerCase().includes(filter.toLowerCase())
+            ).forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'study-item';
+                div.innerHTML = `<div class="study-q">${item.question}</div><div class="study-a">${item.answer}</div>`;
+                container.appendChild(div);
+            });
         }
 
-        window.toggleModal = () => {
-            document.getElementById('settings-modal').classList.toggle('active');
+        // Settings & Storage Logic
+        window.toggleSettings = () => {
+            const modal = document.getElementById('settings-modal');
+            modal.classList.toggle('active');
             document.getElementById('theme-toggle').checked = state.user.settings.theme === 'dark';
         };
 
         window.toggleTheme = () => {
-            state.user.settings.theme = document.getElementById('theme-toggle').checked ? 'dark' : 'light';
-            applySettings(); saveData();
+            const isDark = document.getElementById('theme-toggle').checked;
+            state.user.settings.theme = isDark ? 'dark' : 'light';
+            applySettings();
+            saveData();
         };
 
         window.changeFontSize = (delta) => {
-            state.user.settings.fontSize = Math.max(12, Math.min(22, state.user.settings.fontSize + delta));
-            applySettings(); saveData();
+            state.user.settings.fontSize = Math.max(12, Math.min(24, state.user.settings.fontSize + delta));
+            applySettings();
+            saveData();
         };
 
         window.resetData = () => {
-            if(confirm('Erase all memory? This action is irreversible.')) {
-                state.user.stats = { drugs: { mastered: 0, highscore: 0, quizzes: 0 }, law: { mastered: 0, highscore: 0, quizzes: 0 }, lastActive: new Date().toISOString() };
-                saveData(); renderDashboard(); toggleModal();
+            if(confirm('Warning: This will permanently wipe all local memory and progress. Proceed?')) {
+                state.user.stats = {
+                    drugs: { mastered: 0, highscore: 0, quizzes: 0 },
+                    law: { mastered: 0, highscore: 0, quizzes: 0 },
+                    lastActive: new Date().toISOString()
+                };
+                saveData();
+                renderDashboard();
+                toggleSettings();
             }
         };
 
         function applySettings() {
             document.documentElement.setAttribute('data-theme', state.user.settings.theme);
-            document.documentElement.style.setProperty('--font-size', `${state.user.settings.fontSize}px`);
+            document.documentElement.style.setProperty('--font-base', `${state.user.settings.fontSize}px`);
         }
 
-        function saveData() { localStorage.setItem('mariamAppV2026', JSON.stringify(state.user)); }
+        function saveData() { localStorage.setItem('mariamAppElite', JSON.stringify(state.user)); }
 
+        // Start App
         init();
     </script>
 </body>
